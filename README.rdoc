@@ -1,0 +1,41 @@
+= AjaxWillPaginate
+
+http://github.com/devpuppy/ajax_will_paginate
+
+An easy-to-use Rails plugin that works with WillPaginate to provide pagination via AJAX.  
+
+* Unobtrusive JavaScript leaves existing WillPaginate markup alone
+* Can be applied from JavaScript files or within your Rails templates
+* Works with jQuery or Prototype.js with an option for Low-Pro
+
+= Example
+
+app/views/items/index.html.erb
+  <%= ajax_will_paginate_javascript_include_tag %>
+  ...
+  <%= render :partial => 'items' %>
+  
+app/views/items/_items.html.erb
+  <div id="items">
+    <%= render :partial => 'item', :collection => @items %>
+    <%= ajax_will_paginate @items, :param_name => 'item_page' %>
+  </div>
+  
+app/controllers/items_controller.rb
+  def index
+    @items = Item.all.paginate :param_name => 'item_page'
+    respond_to do |wants|
+      wants.html
+      wants.js { ajax_will_paginate 'items', :partial => 'item', :collection => @items }
+    end
+  end
+
+= Install
+
+
+= TODO
+* jQuery option
+* Low-Pro option
+* 
+
+Copyright (c) 2010 Justin Jones, released under the MIT license
