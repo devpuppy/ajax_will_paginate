@@ -13,11 +13,11 @@ An easy-to-use Rails plugin that works with WillPaginate to provide pagination v
 app/views/items/index.html.erb
   <%= ajax_will_paginate_javascript_include_tag %>
   ...
-  <%= render :partial => 'items' %>
+  <%= render :partial => 'items', :object => @items %>
   
 app/views/items/_items.html.erb
   <div id="items">
-    <%= render :partial => 'item', :collection => @items %>
+    <%= render :partial => 'item', :collection => items %>
     <%= ajax_will_paginate @items, :param_name => 'item_page' %>
   </div>
   
@@ -26,16 +26,24 @@ app/controllers/items_controller.rb
     @items = Item.all.paginate :param_name => 'item_page'
     respond_to do |wants|
       wants.html
-      wants.js { ajax_will_paginate 'items', :partial => 'item', :collection => @items }
+      wants.js { ajax_will_paginate 'items', :partial => 'items', :object => @items }
     end
   end
 
 = Install
 
+= Configure
+
 
 = TODO
 * jQuery option
 * Low-Pro option
-* 
+* Persistence using Low-Pro and jQuery's .live()
+* Smart about selectors, not just id's
+* Unit tests
+* Automagically pull target selector from params
+* Callbacks, especially for loading spinner
+* Selectively copy javascripts with install.rb
+* Proper Rails 3 will_paginate dependency
 
 Copyright (c) 2010 Justin Jones, released under the MIT license

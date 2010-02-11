@@ -1,1 +1,1 @@
-# Install hook code here
+# Try to detect which javascript frameworks the app supports and copy corresponding javascript includes
