@@ -35,6 +35,6 @@ end
 if defined? Rails
   AjaxWillPaginate.enable_actionpack if defined? ActionController
   unless File.exist?(File.join(RAILS_ROOT, 'public', 'javascripts', AjaxWillPaginate.javascript_include_filename))
-    Rails.logger.warn "#{javascript_include_filename} not found in your application. Run ./script/generate ajax_will_paginate_javascripts to create it"
+    Rails.logger.warn "#{AjaxWillPaginate.javascript_include_filename} not found in your application. Run ./script/generate ajax_will_paginate_javascripts to create it"
   end
 end
